@@ -1,6 +1,6 @@
 
 CC=gcc
-CFLAGS=-levent -lgd -lmemcached -lm -I../deps/hiredis -O3 -g -Wall
+CFLAGS=-levent -lgd -lmemcached -lm -I../deps/hiredis -I/usr/include -O3 -g -Wall
 
 CCCOLOR="\033[34m"
 LINKCOLOR="\033[34;1m"
@@ -41,7 +41,7 @@ dependencies:
 	cd ../deps/hiredis && $(MAKE) 
 
 hcaptchad: dependencies $(OBJ)
-	$(QUIET_LINK)$(CC) -o $(PRGNAME) $(CCOPT) $(DEBUG) $(OBJ) $(CCLINK)
+	$(QUIET_LINK)$(CC) -o $(PRGNAME) $(CCOPT) $(DEBUG) $(OBJ) $(CFLAGS) $(CCLINK)
 
 .c.o:
 	$(CC) -c $(CFLAGS) $(OBJARCH) $(DEBUG) $(COMPILE_TIME) $<

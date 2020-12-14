@@ -75,7 +75,7 @@ void font_setup()
 {
     int i, x, y, brect[8];
     char *err, s[2];
-    int ft_color, bg_color, trans;
+    int ft_color, trans;
     
     gdFTStringExtra strex = {0};
     
@@ -108,7 +108,7 @@ void font_setup()
         gdImageAlphaBlending(im, 0);
         gdImageSaveAlpha(im, 1);
         
-        bg_color = gdImageColorAllocate(im, 255, 255, 255);
+        //bg_color = gdImageColorAllocate(im, 255, 255, 255);
         ft_color = gdImageColorAllocate(im, 0, 0, 0);
         trans    = gdImageColorAllocateAlpha(im, 255, 255, 255, 127);
         
@@ -281,8 +281,9 @@ char * data_build(char *key, size_t *imosize)
     memcached_return rc;
     
     // Save Key-Word
-    char key2[100];
+    char key2[100] = {};
     sprintf(key2, "%s1", key);
+	printf("key: %s, word: %s \n", key, word);
     rc = memcached_set(memc, key2, strlen(key2), word, strlen(word), cfg.img_timeout, 0);
     if (rc != MEMCACHED_SUCCESS) {
         //fprintf(stderr, "hash: memcache error %s\n", memcached_strerror(memc, rc));
@@ -324,7 +325,7 @@ int data_del(char *k)
     if (k == NULL)
         return 1;
     
-    char k2[100];
+    char k2[100] = {};
     sprintf(k2, "%s1", k);
     
     //time_t expiration = 0;
@@ -363,7 +364,7 @@ int data_check(char *k, char *v)
     if (k == NULL || v == NULL)
         return 1;
     
-    char k2[100];
+    char k2[100] = {};
     sprintf(k2, "%s1", k);
     
     memcached_return rc;
@@ -372,7 +373,8 @@ int data_check(char *k, char *v)
     char *v2 = memcached_get(memc, k2, strlen(k2), &ims, &flags, &rc);
     if (rc != MEMCACHED_SUCCESS) {
         return 1;
-    }    
+    }
+
     if (strcmp(v, v2) != 0) {
         return 1;
     }

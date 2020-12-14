@@ -36,6 +36,10 @@ LVS -> Hooto Captcha Cluster -> Memcached Cluster
 ### Debian 6.x
     apt-get install gcc g++ libgd2-xpm-dev libevent-dev libmemcached-dev memcached git
 
+
+### Ubuntu 16.x
+    apt-get install gcc g++ libgd-dev libevent-dev libmemcached-dev memcached
+    
 ### CentOS 5.x/6.x
     yum install gcc gcc-c++ gd-devel libevent-devel libmemcached-devel memcached git
 

@@ -507,13 +507,12 @@ int main(int argc, char **argv)
         }
     }
 
-    if (config_file == NULL) {
-        fprintf(stderr, "Fatal error, no config file setting '%s'\n\n", "-c /path/of/hcaptcha.conf");
-        exit(1);
-    }
-
     initConfig();
-    loadConfig(config_file);
+    if (config_file == NULL) {
+		loadConfig("./hcaptcha.conf");
+    } else {
+		loadConfig(config_file);
+	}
     
     if (cfg.daemon == true) {
         pid_t pid = fork();

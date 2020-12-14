@@ -57,6 +57,23 @@ LVS -> Hooto Captcha Cluster -> Memcached Cluster
     killall hcaptchad
     Signal(15) Stop hcaptcha/1.0.4 [OK]
 
+```shell
+vi /lib/systemd/system/rc-local.service
+```
+```txt
+[Install]
+WantedBy=multi-user.target
+Alias=rc-local.service
+```
+```shell
+vi /etc/rc.local
+sudo chmod +x /etc/rc.local
+
+sudo systemctl enable rc-local
+sudo systemctl start rc-local.service
+sudo systemctl status rc-local.service
+```
+
 ### Confirm the successful installation
     http://127.0.0.1:9527/hcaptcha/api/image?hcaptcha_token=123&hcaptcha_opt=refresh
 

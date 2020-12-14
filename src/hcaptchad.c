@@ -20,7 +20,6 @@
 
 #include <libmemcached/memcached.h>
 
-#include "../deps/hiredis/sds.h"    /* Dynamic safe strings */
 #include "config.h"
 
 #define MIN(a,b)    ((a)>(b)?(b):(a))
@@ -150,8 +149,8 @@ char * data_build(char *key, size_t *imosize)
     float color, color_x, color_y, color_xy;
     
     int word_len = (rand() % (cfg.length[1] - cfg.length[0] + 1)) + cfg.length[0];
-    char word[word_len];
-    
+    char word[word_len+1];
+    word[word_len] = 0;
     for (i = 0; i < word_len; i++) {
     
         j = rand() % s_fts_len;
